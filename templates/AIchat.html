@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服装アドバイザー</title>
+    <title>服装アドバイザー - 切り抜き</title>
     <!-- Tailwind CSS CDN を読み込み -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -11,6 +11,7 @@
         body {
             font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             background-color: #f8fafc; /* Tailwind's gray-50 */
+            padding-bottom: 5rem; /* フッターの高さ分、コンテンツの下に余白を追加 */
         }
         /* 画像のホバーエフェクト（軽く拡大） */
         img#clothingImage, img#selectedImagePreview {
@@ -30,7 +31,7 @@
         /* カスタムファイル入力ラベルのスタイル */
         .custom-file-upload-label {
             display: inline-block;
-            background: linear-gradient(to right, #4b5563, #1f2937); /* グレー系のグラデーション */
+            background-color: #374151; /* グレー */
             color: white;
             border-radius: 9999px; /* 丸いボタン */
             padding: 1rem 2rem; /* 大きめのパディング */
@@ -40,48 +41,87 @@
             cursor: pointer;
             font-weight: 600; /* semi-bold */
             font-size: 1.125rem; /* text-lg */
-            border: 1px solid #374151; /* border-gray-700 */
+            border: 1px solid #4b5563; /* 少し明るいボーダー */
             transition: all 0.2s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 控えめな影 */
             text-align: center; /* テキスト中央寄せ */
         }
         .custom-file-upload-label:hover {
-            background: linear-gradient(to right, #1f2937, #000000); /* ホバーで暗く */
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            background-color: #1f2937; /* ホバーで暗く */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* ホバーで少し影を強調 */
             transform: translateY(-1px);
         }
         .custom-file-upload-label:active {
-            background: linear-gradient(to right, #000000, #1f2937);
+            background-color: #000000;
             transform: translateY(0);
             box-shadow: none;
         }
+        /* 一般的なボタンのスタイル調整 */
+        button {
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 控えめな影 */
+        }
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        /* フッターナビゲーションのスタイル */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.75rem 0;
+            z-index: 1000;
+            border-top: 1px solid #e2e8f0; /* gray-200 */
+        }
+        .footer-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #64748b; /* gray-600 */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* medium */
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .footer-nav-item:hover {
+            color: #1a202c; /* gray-900 */
+            background-color: #f1f5f9; /* gray-100 */
+        }
+        .footer-nav-item svg {
+            width: 1.5rem; /* h-6 */
+            height: 1.5rem; /* w-6 */
+            margin-bottom: 0.25rem;
+        }
+        /* アクティブなナビゲーションアイテムのスタイル */
+        .footer-nav-item.active {
+            color: #0f172a; /* gray-900 */
+            font-weight: 600; /* semi-bold */
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center py-12 px-4 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 text-gray-800">
+<body class="min-h-screen flex flex-col items-center justify-center py-12 px-4 bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 text-gray-800">
 
     <!-- メインコンテナ -->
-    <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-xl w-full max-w-5xl space-y-10 border border-gray-300 transform transition-all duration-300 hover:shadow-2xl hover:scale-[1.005]">
+    <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-xl w-full max-w-lg md:max-w-5xl mx-auto space-y-10 border border-gray-200 transform transition-all duration-300 hover:shadow-2xl hover:scale-[1.005]">
         <h1 class="text-5xl font-extrabold text-center text-gray-900 mb-8 leading-tight">
             <span class="block text-4xl sm:text-5xl text-gray-800">切り抜き</span>
             <span class="block text-2xl sm:text-3xl font-semibold text-gray-600 mt-2">服装アドバイザー</span>
         </h1>
 
-        <!-- 天気情報と服装アドバイスセクション -->
-        <section class="p-6 sm:p-8 bg-gray-50 rounded-2xl shadow-md border-l-4 border-gray-500 transform transition-transform duration-300 hover:scale-[1.005]">
-            <h2 class="text-3xl font-bold text-gray-700 mb-4 flex items-center">
-                <span class="mr-3 text-4xl leading-none font-serif">●</span> 今日の天気と服装アドバイス
-            </h2>
-            <p id="weatherInfo" class="text-lg text-gray-700 mb-2 font-medium">
-                <span class="text-gray-500">天気情報を取得中...</span>
-            </p>
-            <p id="advice" class="text-xl text-gray-800 font-semibold leading-relaxed">
-                <span class="text-gray-500">服装のアドバイスを取得中...</span>
-            </p>
-            <div id="weatherAdviceError" class="mt-4 text-red-600 font-medium hidden p-2 bg-red-50 rounded-lg border border-red-200"></div>
-        </section>
-
         <!-- 服の背景除去セクション -->
-        <section class="p-6 sm:p-8 bg-gray-50 rounded-2xl shadow-md border-l-4 border-gray-500 transform transition-transform duration-300 hover:scale-[1.005]">
+        <section class="p-6 sm:p-8 bg-gray-50 rounded-2xl shadow-sm border-l-4 border-gray-400 transform transition-transform duration-300 hover:scale-[1.005]">
             <h2 class="text-3xl font-bold text-gray-700 mb-4 flex items-center">
                 <span class="mr-3 text-4xl leading-none font-serif">■</span> 服の背景除去 & AI分類ツール
             </h2>
@@ -90,7 +130,7 @@
             </p>
             <form id="uploadForm" enctype="multipart/form-data" class="flex flex-col items-center space-y-5">
                 <!-- ファイル選択入力欄とカスタムラベル -->
-                <label for="imageInput" class="custom-file-upload-label w-full md:w-auto px-8 py-4 shadow-md">
+                <label for="imageInput" class="custom-file-upload-label w-full md:w-auto px-8 py-4">
                     <span id="fileInputLabelText">ファイルを選択</span>
                     <input type="file" name="image" accept="image/*" id="imageInput" class="hidden" onchange="handleImageSelection()">
                 </label>
@@ -113,7 +153,7 @@
             <!-- 選択した画像プレビューエリア -->
             <div class="flex justify-center items-center p-6 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-400 min-h-[200px]">
                 <img id="selectedImagePreview" src="" alt="選択された画像プレビュー" 
-                     class="hidden max-w-full h-auto rounded-xl shadow-lg border border-gray-300 p-1" 
+                     class="hidden max-w-full h-auto rounded-xl shadow-sm border border-gray-300 p-1" 
                      style="max-height: 450px; object-fit: contain;">
                 <p id="noPreviewMessage" class="text-gray-500 text-lg">ここに選択した画像が表示されます。</p>
             </div>
@@ -125,7 +165,7 @@
             <!-- 背景除去後の画像表示エリア -->
             <div class="flex justify-center items-center p-6 bg-gray-100 rounded-2xl border-2 border-dashed border-gray-400 min-h-[200px]">
                 <img id="clothingImage" src="" alt="切り抜かれた服" 
-                     class="hidden max-w-full h-auto rounded-xl shadow-lg border border-gray-300 p-1" 
+                     class="hidden max-w-full h-auto rounded-xl shadow-sm border border-gray-300 p-1" 
                      style="max-height: 450px; object-fit: contain;">
                 <p id="noImageMessage" class="text-gray-500 text-lg">ここに切り抜かれた服が表示されます。</p>
             </div>
@@ -134,15 +174,13 @@
                 <p id="classificationResult" class="text-2xl font-bold text-gray-800 p-3 bg-gray-200 rounded-lg shadow-inner"></p>
                 <!-- おすすめコーデ提案ボタン -->
                 <button type="button" onclick="suggestOutfit()" id="suggestOutfitButton"
-                        class="mt-4 w-full md:w-auto px-8 py-4 bg-gray-800 text-white font-bold text-xl rounded-xl shadow-lg
-                               hover:bg-black focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-opacity-75
-                               transition ease-in-out duration-200 transform hover:-translate-y-0.5">
+                        class="mt-4 w-full md:w-auto px-8 py-4 bg-gray-800 text-white font-bold text-xl rounded-xl">
                     おすすめコーデを提案
                 </button>
             </div>
 
             <!-- コーディネート提案結果表示エリア -->
-            <div id="outfitSuggestionsContainer" class="mt-10 p-6 sm:p-8 bg-gray-50 rounded-2xl shadow-md border-l-4 border-gray-500 hidden">
+            <div id="outfitSuggestionsContainer" class="mt-10 p-6 sm:p-8 bg-gray-50 rounded-2xl shadow-sm border-l-4 border-gray-400 hidden">
                 <h3 class="text-3xl font-bold text-gray-700 mb-4 flex items-center">
                     <span class="mr-3 text-4xl leading-none font-serif">●</span> おすすめコーディネート
                 </h3>
@@ -157,79 +195,82 @@
                 <div id="outfitSuggestionsError" class="mt-4 text-red-600 font-medium hidden p-2 bg-red-50 rounded-lg border border-red-200"></div>
             </div>
         </section>
-
-        <!-- 接続テストセクション (診断用) -->
-        <section class="p-6 sm:p-8 bg-gray-50 rounded-2xl shadow-md border-l-4 border-gray-500 transform transition-transform duration-300 hover:scale-[1.005]">
-            <h2 class="text-3xl font-bold text-gray-700 mb-4 flex items-center">
-                <span class="mr-3 text-4xl leading-none font-serif">■</span> サーバー接続テスト
-            </h2>
-            <p class="text-lg text-gray-700 mb-6">
-                Flaskサーバーへの基本的な接続をテストし、状態を確認します。
-            </p>
-            <button type="button" onclick="testConnection()"
-                        class="w-full md:w-auto px-8 py-4 bg-gray-700 text-white font-bold text-xl rounded-xl shadow-lg
-                               hover:bg-black focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-opacity-75
-                               transition ease-in-out duration-200 transform hover:-translate-y-0.5">
-                接続テストを実行
-            </button>
-            <p id="connectionTestResult" class="mt-6 text-xl font-semibold"></p>
-        </section>
     </div>
+
+    <!-- フッターナビゲーションバー -->
+    <nav class="footer-nav">
+        <a href="/" class="footer-nav-item">
+            <!-- ホームアイコン -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2 2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            <span>ホーム</span>
+        </a>
+        <a href="/image_cropping_feature" class="footer-nav-item active">
+            <!-- 切り抜きアイコン (ハサミなど) -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+            <span>切り抜き</span>
+        </a>
+        <!-- 必要に応じて他のメニューアイテムを追加 -->
+        <a href="#" class="footer-nav-item">
+            <!-- 登録傾向アイコン -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+            </svg>
+            <span>傾向</span>
+        </a>
+        <a href="#" class="footer-nav-item">
+            <!-- 気分アイコン -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>気分</span>
+        </a>
+    </nav>
 
     <script>
         // DOM要素の参照
-        const weatherInfoEl = document.getElementById("weatherInfo");
-        const adviceEl = document.getElementById("advice");
-        const weatherAdviceErrorEl = document.getElementById("weatherAdviceError");
         const imageInputEl = document.getElementById("imageInput");
         const clothingImageEl = document.getElementById("clothingImage");
         const loadingEl = document.getElementById("loading");
         const errorMessageEl = document.getElementById("errorMessage");
-        const connectionTestResultEl = document.getElementById("connectionTestResult");
         const noImageMessageEl = document.getElementById("noImageMessage");
         const classificationResultEl = document.getElementById("classificationResult");
         const classificationResultContainerEl = document.getElementById("classificationResultContainer");
         const selectedImagePreviewEl = document.getElementById("selectedImagePreview");
         const noPreviewMessageEl = document.getElementById("noPreviewMessage");
-        const suggestOutfitButtonEl = document.getElementById("suggestOutfitButton"); // 新しいボタン
-        const outfitSuggestionsContainerEl = document.getElementById("outfitSuggestionsContainer"); // 新しいコンテナ
-        const outfitSuggestionsLoadingEl = document.getElementById("outfitSuggestionsLoading"); // 新しいロード
-        const outfitSuggestionsResultEl = document.getElementById("outfitSuggestionsResult"); // 新しい結果表示
-        const outfitSuggestionsErrorEl = document.getElementById("outfitSuggestionsError"); // 新しいエラー表示
+        const suggestOutfitButtonEl = document.getElementById("suggestOutfitButton");
+        const outfitSuggestionsContainerEl = document.getElementById("outfitSuggestionsContainer");
+        const outfitSuggestionsLoadingEl = document.getElementById("outfitSuggestionsLoading");
+        const outfitSuggestionsResultEl = document.getElementById("outfitSuggestionsResult");
+        const outfitSuggestionsErrorEl = document.getElementById("outfitSuggestionsError");
 
-        let currentClassification = ""; // 現在の分類結果を保持
-        let currentProcessedImageFilename = ""; // 現在の処理済み画像ファイル名を保持
-        let currentWeatherData = ""; // 現在の天気情報を保持
+        let currentClassification = "";
+        let currentProcessedImageFilename = ""; // S3キーまたはローカルファイル名
+        let currentWeatherData = ""; // 天気情報を保持
 
-        /**
-         * 天気情報と服装アドバイスをバックエンドから取得し、ページに表示します。
-         */
-        async function fetchWeatherAdvice() {
-            weatherInfoEl.innerHTML = '<span class="text-gray-500">天気情報を取得中...</span>';
-            adviceEl.innerHTML = '<span class="text-gray-500">服装のアドバイスを取得中...</span>';
-            weatherAdviceErrorEl.classList.add('hidden');
-
+        // ページロード時に天気情報を取得 (コーデ提案に必要)
+        async function fetchWeatherDataForOutfitSuggestion() {
             try {
+                // 絶対パスを指定
                 const response = await fetch("http://127.0.0.1:5000/get_weather_advice");
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({})); 
-                    throw new Error(errorData.advice || `HTTPエラー! ステータス: ${response.status}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    currentWeatherData = data.weather || "不明な天気";
+                    console.log("天気情報が背景除去ページで取得されました:", currentWeatherData);
+                } else {
+                    console.error("天気情報の取得に失敗しました:", response.status);
+                    currentWeatherData = "天気情報を取得できませんでした。";
                 }
-                const data = await response.json();
-
-                currentWeatherData = data.weather || "不明な天気"; // 天気情報を保存
-
-                weatherInfoEl.innerText = "天気: " + (data.weather || "取得できませんでした。");
-                adviceEl.innerText = "アドバイス: " + (data.advice || "取得できませんでした。");
-
             } catch (error) {
-                console.error("天気情報とアドバイスの取得中にエラーが発生しました:", error);
-                weatherInfoEl.innerText = "天気: 取得中にエラーが発生しました。";
-                adviceEl.innerText = "アドバイス: 取得中にエラーが発生しました。";
-                weatherAdviceErrorEl.innerText = `エラー: ${error.message}`;
-                weatherAdviceErrorEl.classList.remove('hidden');
+                console.error("天気情報取得エラー:", error);
+                currentWeatherData = "天気情報を取得できませんでした。";
             }
         }
+        window.onload = fetchWeatherDataForOutfitSuggestion;
+
 
         /**
          * 画像ファイルが選択されたときにプレビューを表示し、アップロード処理を開始します。
@@ -240,14 +281,14 @@
             // 以前の表示をリセット
             errorMessageEl.classList.add('hidden'); 
             clothingImageEl.classList.add('hidden'); 
-            noImageMessageEl.classList.remove('hidden'); // 切り抜き後画像メッセージを表示
-            classificationResultContainerEl.classList.add('hidden'); // 分類結果も隠す
+            noImageMessageEl.classList.remove('hidden'); 
+            classificationResultContainerEl.classList.add('hidden');
             selectedImagePreviewEl.classList.add('hidden');
-            noPreviewMessageEl.classList.remove('hidden'); // プレビューメッセージを表示
-            loadingEl.classList.add('hidden'); // ロードを一旦隠す
-            outfitSuggestionsContainerEl.classList.add('hidden'); // コーデ提案結果も隠す
-            outfitSuggestionsResultEl.innerText = ""; // コーデ提案結果をクリア
-            outfitSuggestionsErrorEl.classList.add('hidden'); // コーデ提案エラーも隠す
+            noPreviewMessageEl.classList.remove('hidden'); 
+            loadingEl.classList.add('hidden'); 
+            outfitSuggestionsContainerEl.classList.add('hidden'); 
+            outfitSuggestionsResultEl.innerText = ""; 
+            outfitSuggestionsErrorEl.classList.add('hidden'); 
 
             if (!imageFile) {
                 errorMessageEl.innerText = "画像を選択してください！";
@@ -260,12 +301,12 @@
             reader.onload = function(e) {
                 selectedImagePreviewEl.src = e.target.result;
                 selectedImagePreviewEl.classList.remove("hidden");
-                noPreviewMessageEl.classList.add("hidden"); // プレビューメッセージを隠す
+                noPreviewMessageEl.classList.add("hidden"); 
                 
                 // プレビュー表示後、画像をアップロード
                 uploadImage();
             };
-            reader.readAsDataURL(imageFile); // ファイルをData URLとして読み込む
+            reader.readAsDataURL(imageFile); 
         }
 
         /**
@@ -274,10 +315,10 @@
         async function uploadImage() {
             // ローディング表示
             loadingEl.classList.remove('hidden'); 
-            errorMessageEl.classList.add('hidden'); // 以前のエラーメッセージを隠す
-            classificationResultContainerEl.classList.add('hidden'); // 分類結果も隠す
-            suggestOutfitButtonEl.classList.add('hidden'); // コーデ提案ボタンも隠す
-            outfitSuggestionsContainerEl.classList.add('hidden'); // コーデ提案結果も隠す
+            errorMessageEl.classList.add('hidden'); 
+            classificationResultContainerEl.classList.add('hidden'); 
+            suggestOutfitButtonEl.classList.add('hidden'); 
+            outfitSuggestionsContainerEl.classList.add('hidden'); 
             
             const formData = new FormData();
             const imageFile = imageInputEl.files[0]; 
@@ -292,6 +333,7 @@
             formData.append("image", imageFile);
 
             try {
+                // 絶対パスを指定
                 const response = await fetch("http://127.0.0.1:5000/remove_bg", {
                     method: "POST",
                     body: formData
@@ -306,16 +348,16 @@
                 if (data.output) {
                     clothingImageEl.src = data.output;
                     clothingImageEl.classList.remove("hidden");
-                    noImageMessageEl.classList.add('hidden'); // 切り抜き後画像メッセージを隠す
+                    noImageMessageEl.classList.add('hidden'); 
                     
-                    currentProcessedImageFilename = data.output.split('/').pop(); // ファイル名を保存
+                    currentProcessedImageFilename = data.s3_key_for_backend || data.output.split('/').pop(); 
 
                     // 画像分類結果の表示
                     if (data.classification) {
-                        currentClassification = data.classification; // 分類結果を保存
+                        currentClassification = data.classification; 
                         classificationResultEl.innerText = `種類: ${data.classification}`;
                         classificationResultContainerEl.classList.remove("hidden");
-                        suggestOutfitButtonEl.classList.remove('hidden'); // 分類成功したらボタンを表示
+                        suggestOutfitButtonEl.classList.remove('hidden'); 
                     } else {
                         classificationResultEl.innerText = "種類: 分類できませんでした。";
                         classificationResultContainerEl.classList.remove("hidden");
@@ -331,7 +373,7 @@
                 noImageMessageEl.classList.remove('hidden'); 
                 console.error("処理エラー:", error);
             } finally {
-                loadingEl.classList.add('hidden'); // 全体ロードを隠す
+                loadingEl.classList.add('hidden'); 
             }
         }
 
@@ -339,10 +381,10 @@
          * おすすめコーデ提案をバックエンドにリクエストし、結果を表示します。
          */
         async function suggestOutfit() {
-            outfitSuggestionsContainerEl.classList.add('hidden'); // 以前の表示を隠す
-            outfitSuggestionsResultEl.innerText = ""; // 結果をクリア
-            outfitSuggestionsErrorEl.classList.add('hidden'); // エラーを隠す
-            outfitSuggestionsLoadingEl.classList.remove('hidden'); // ロードを表示
+            outfitSuggestionsContainerEl.classList.add('hidden'); 
+            outfitSuggestionsResultEl.innerText = ""; 
+            outfitSuggestionsErrorEl.classList.add('hidden'); 
+            outfitSuggestionsLoadingEl.classList.remove('hidden'); 
 
             if (!currentProcessedImageFilename || !currentClassification || !currentWeatherData) {
                 outfitSuggestionsErrorEl.innerText = "コーデ提案に必要な情報が不足しています。画像をアップロードし、天気情報を確認してください。";
@@ -352,13 +394,14 @@
             }
 
             try {
+                // 絶対パスを指定
                 const response = await fetch("http://127.0.0.1:5000/get_outfit_suggestions", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        image_filename: currentProcessedImageFilename,
+                        image_identifier: currentProcessedImageFilename, 
                         classification: currentClassification,
                         current_weather: currentWeatherData
                     }),
@@ -371,7 +414,13 @@
 
                 const data = await response.json();
                 if (data.suggestion) {
-                    outfitSuggestionsResultEl.innerText = data.suggestion;
+                    const formattedSuggestion = data.suggestion.split('\n').map(line => {
+                        if (line.trim().startsWith('-')) {
+                            return `<li class="mb-1">${line.trim()}</li>`;
+                        }
+                        return line.trim();
+                    }).join('');
+                    outfitSuggestionsResultEl.innerHTML = `<ul class="list-disc list-inside">${formattedSuggestion}</ul>`;
                     outfitSuggestionsContainerEl.classList.remove("hidden");
                 } else {
                     outfitSuggestionsErrorEl.innerText = "コーデ提案を取得できませんでした。";
@@ -385,33 +434,6 @@
                 outfitSuggestionsLoadingEl.classList.add('hidden');
             }
         }
-
-
-        /**
-         * サーバー接続テストを実行する関数。
-         */
-        async function testConnection() {
-            connectionTestResultEl.innerText = "接続テスト中...";
-            connectionTestResultEl.style.color = 'gray';
-            try {
-                const response = await fetch("http://127.0.0.1:5000/test_connection");
-                if (response.ok) {
-                    const data = await response.json();
-                    connectionTestResultEl.innerText = "接続成功: " + data.message;
-                    connectionTestResultEl.style.color = 'green';
-                } else {
-                    connectionTestResultEl.innerText = `接続失敗: ステータス ${response.status}`;
-                    connectionTestResultEl.style.color = 'red';
-                }
-            } catch (error) {
-                connectionTestResultEl.innerText = "ネットワークエラー: サーバーに接続できません。";
-                connectionTestResultEl.style.color = 'red';
-                console.error("接続テストエラー:", error);
-            }
-        }
-
-        // ページが完全に読み込まれたときに天気情報を取得する関数を実行
-        window.onload = fetchWeatherAdvice;
     </script>
 </body>
 </html>
